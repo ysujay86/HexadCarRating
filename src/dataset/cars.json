@@ -1,0 +1,90 @@
+[
+  {
+    "id" : 1,
+    "rank" : 1,
+    "name" : "VW Golf",
+    "type" : "SUV",
+    "rating": 4.5,
+    "selfrating": 4
+  },
+  {
+    "id" : 2,
+    "rank" : 2,
+    "name" : "VW Tiguan",
+    "type" : "Hatchback",
+    "rating": 4.6,
+    "selfrating": 3
+  },
+  {
+    "id" : 3,
+    "rank" : 5,
+    "name" : "VW Polo",
+    "type" : "SUV",
+    "rating": 3.5,
+    "selfrating": 3.5
+  },
+  {
+    "id" : 4,
+    "rank" : 4,
+    "name" : "Ford Focus",
+    "type" : "Hatchback",
+    "rating": 4.3,
+    "selfrating": 3.5
+  },
+  {
+    "id" : 5,
+    "rank" : 3,
+    "name" : "Mercedes Benz C-Class",
+    "type" : "MUV",
+    "rating": 4.3,
+    "selfrating": 0
+  },
+  {
+    "id" : 6,
+    "rank" : 6,
+    "name" : "Mahindra Jeep",
+    "type" : "SUV",
+    "rating": 4.6,
+    "selfrating": 4
+  },
+  {
+    "id" : 7,
+    "rank" : 7,
+    "name" : "Porsche Jinc",
+    "type" : "Hatchback",
+    "rating": 4.6,
+    "selfrating": 3
+  },
+  {
+    "id" : 8,
+    "rank" : 8,
+    "name" : "Audi A4",
+    "type" : "Sedan",
+    "rating": 3.5,
+    "selfrating": 3.5
+  },
+  {
+    "id" : 9,
+    "rank" : 9,
+    "name" : "Etios Liva",
+    "type" : "Hatchback",
+    "rating": 4.0,
+    "selfrating": 4.5
+  },
+  {
+    "id" : 10,
+    "rank" : 10,
+    "name" : "VW Passat",
+    "type" : "MUV",
+    "rating": 4.1,
+    "selfrating": 0
+  },
+  {
+    "id" : 11,
+    "rank" : 11,
+    "name" : "Skoda Octavia",
+    "type" : "Sedan",
+    "rating": 4.3,
+    "selfrating": 3.2
+  }
+]

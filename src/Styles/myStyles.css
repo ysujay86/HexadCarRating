@@ -1,0 +1,361 @@
+/* IOSA MOB 
+Author :Sumathi Muthaiah*/
+
+html, body {
+    font-family: 'Graphik-Regular';
+    font-size: inherit;
+    background-color: #f8f8f8;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+    body > div, body > div > div {
+        height: 100%;
+    }
+
+.layout-boxed html,
+.layout-boxed body {
+    height: 100%;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Graphik-Regular';
+    font-weight: 12px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.wrapper {
+    min-height: 70.8%;
+    position: relative;
+    overflow: hidden;
+    width: 100%
+}
+
+    .wrapper:before,
+    .wrapper:after {
+        content: " ";
+        display: table;
+    }
+
+    .wrapper:after {
+        clear: both;
+    }
+
+.sidebar-mini.sidebar-collapse .main-sidebar {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+    width: 69px !important;
+    z-index: 850;
+    height: 100%;
+    border-right: 1px solid #ccc;
+    box-shadow: -1px -1px 5px #ccc;
+    background-color: #404040;
+}
+
+.main-sidebar, .left-side {
+    position: absolute;
+    left: 0;
+    width: 230px;
+    z-index: 810;
+    -webkit-transition: -webkit-transform .3s ease-in-out, width .3s ease-in-out;
+    -moz-transition: -moz-transform .3s ease-in-out, width .3s ease-in-out;
+    -o-transition: -o-transform .3s ease-in-out, width .3s ease-in-out;
+    transition: transform .3s ease-in-out, width .3s ease-in-out;
+}
+
+
+
+.navbar-nav > li.dropdown:hover a .caret, .navbar-nav > li.dropdown:focus a .caret, .navbar-nav > li.dropdown:active a .caret {
+    color: #fff;
+}
+
+.sidebar-menu, .main-sidebar .user-panel, .sidebar-menu > li.header {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 69px;
+}
+
+
+    .sidebar-menu .treeview-menu {
+        padding: 0px !important;
+    }
+
+.sidebar-menu-icon {
+    width: 24px;
+    height: 24px;
+    float: left;
+    margin-right: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.sidebar-menu > li {
+    font-size: 13px;
+    font-family: 'Graphik-Regular';
+    height: 69px;
+    width: 100%;
+}
+
+    .sidebar-menu > li a {
+        height: 52px;
+        width: 52px;
+        display: inline-block;
+        border-radius: 100px;
+        margin-top: 8px;
+        margin-left: 8px;
+    }
+
+.sidebar ul li a span {
+    margin: 9px;
+    background-size: contain;
+}
+
+.sidebar-menu > li a.active {
+    background-color: #019948;
+    border-bottom: 0px;
+}
+
+@media (min-width: 768px) {
+    .sidebar-mini.sidebar-collapse .content-wrapper, .sidebar-mini.sidebar-collapse .right-side, .sidebar-mini.sidebar-collapse .main-footer {
+        /* margin-left: 69px !important; */
+        z-index: 840;
+    }
+}
+
+/*
+ * Component: Main Header
+ * ----------------------
+ */
+.main-header {
+    position: relative;
+    max-height: 100px;
+    height: 48px;
+    z-index: 1030;
+    background-color: #01929f;
+}
+
+    .main-header > .navbar {
+        -webkit-transition: margin-left 0.3s ease-in-out;
+        -o-transition: margin-left 0.3s ease-in-out;
+        transition: margin-left 0.3s ease-in-out;
+        margin-bottom: 0;
+        margin-left: 230px;
+        border: none;
+        min-height: 48px;
+        border-radius: 0;
+    }
+
+.layout-top-nav .main-header > .navbar {
+    margin-left: 0;
+}
+
+.main-header #navbar-search-input.form-control {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: transparent;
+}
+
+    .main-header #navbar-search-input.form-control:focus,
+    .main-header #navbar-search-input.form-control:active {
+        border-color: rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    .main-header #navbar-search-input.form-control::-moz-placeholder {
+        color: #ccc;
+        opacity: 1;
+    }
+
+    .main-header #navbar-search-input.form-control:-ms-input-placeholder {
+        color: #ccc;
+    }
+
+    .main-header #navbar-search-input.form-control::-webkit-input-placeholder {
+        color: #ccc;
+    }
+
+.main-header .navbar-custom-menu,
+.main-header .navbar-right {
+    float: right;
+    height: 48px;
+}
+
+.navbar-nav {
+    height: 100%;
+    float: right;
+}
+
+@media (max-width: 991px) {
+    .main-header .navbar-custom-menu a,
+    .main-header .navbar-right a {
+        color: inherit;
+        background: transparent;
+    }
+}
+
+@media (max-width: 767px) {
+    .main-header .navbar-right {
+        float: none;
+    }
+
+    .navbar-collapse .main-header .navbar-right {
+        margin: 7.5px -15px;
+    }
+
+    .main-header .navbar-right > li {
+        color: inherit;
+        border: 0;
+    }
+}
+
+.main-header .sidebar-toggle {
+    float: left;
+    background-color: transparent;
+    background-image: none;
+    padding: 15px 15px;
+    font-family: fontAwesome;
+}
+
+    .main-header .sidebar-toggle:before {
+        content: "\f0c9";
+    }
+
+    .main-header .sidebar-toggle:hover {
+        color: #fff;
+    }
+
+    .main-header .sidebar-toggle:focus,
+    .main-header .sidebar-toggle:active {
+        background: transparent;
+    }
+
+    .main-header .sidebar-toggle .icon-bar {
+        display: none;
+    }
+
+.main-header .navbar .nav > li.user > a > .fa,
+.main-header .navbar .nav > li.user > a > .glyphicon,
+.main-header .navbar .nav > li.user > a > .ion {
+    margin-right: 5px;
+}
+
+.main-header .navbar .nav > li > a > .label {
+    position: absolute;
+    top: 9px;
+    right: 7px;
+    text-align: center;
+    font-size: 9px;
+    padding: 2px 3px;
+    line-height: .9;
+}
+
+.main-header .logo {
+    -webkit-transition: width 0.3s ease-in-out;
+    -o-transition: width 0.3s ease-in-out;
+    transition: width 0.3s ease-in-out;
+    display: block;
+    float: left;
+    height: 48px;
+    font-size: 20px;
+    line-height: 50px;
+    text-align: center;
+    width: auto;
+    font-family: 'Graphik-Semibold';
+    padding: 0 21px;
+    font-weight: 300;
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+}
+
+    .main-header .logo .logo-lg {
+        display: block;
+    }
+
+    .main-header .logo .logo-mini {
+        display: none;
+    }
+
+.main-header .navbar-brand {
+    color: #fff;
+}
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+.checked {
+    color: orange;
+  }
+  
+.table-striped tbody tr td{
+    padding: 7px 5px !important;
+    text-align: left !important;
+}
+
+.table-striped thead tr th{
+    padding: 5px 5px !important;
+    text-align: left !important;
+}
