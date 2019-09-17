@@ -6,13 +6,13 @@ import { shallow, mount } from 'enzyme';
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import mainReducer from "../reducers/mainReducer";
-const store = createStore(mainReducer);
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-
-Enzyme.configure({ adapter: new Adapter() });
-
+import {  Modal } from 'react-bootstrap';
 import App from '../App';
+import { async } from 'rxjs/internal/scheduler/async';
+Enzyme.configure({ adapter: new Adapter() });
+const store = createStore(mainReducer);
 
 it('renders the rating home', () => {
     const wrapper = mount(
@@ -30,7 +30,7 @@ it('renders the rating list', () => {
     expect(wrapper.find(RatingsHome).find(Rating).length).toEqual(1);
 })
 
-it('renders all cars in list and check if ordered according to rating', () => {
+it('renders all cars in list', () => {
     const wrapper = mount(
         <Provider store={store}>
             <App />
@@ -38,13 +38,21 @@ it('renders all cars in list and check if ordered according to rating', () => {
     );
     //check all cars are listed in Rating component
     expect(wrapper.find(RatingsHome).find(Rating).find('table tbody tr').length).toEqual(11);
+})
+
+it('check if list is ordered according to rating', () => {
+    const wrapper = mount(
+        <Provider store={store}>
+            <App />
+        </Provider>
+    );
     var rating1 = parseFloat(wrapper.find(RatingsHome).find(Rating).find('table tbody tr').at(0).find(".myrate").text());
     var rating2 = parseFloat(wrapper.find(RatingsHome).find(Rating).find('table tbody tr').at(1).find(".myrate").text());
     //rating of item 1 should be greater than or equal to item 2 for checking ordered list
     expect(rating1).toBeGreaterThanOrEqual(rating2);
 })
 
-it('opens the new modal upon edit', () => {
+it('opens the modal upon edit', () => {
     const wrapper = mount(
         <Provider store={store}>
             <App />
@@ -52,9 +60,23 @@ it('opens the new modal upon edit', () => {
     //find and click on first edit button in list
     const button = wrapper.find(RatingsHome).find(Rating).find('button').first();
     button.simulate('click');
-    //check whether modal opens up and modal title appears
-    const text = wrapper.find('ModalTitle');
-    expect(text.length).toBe(1);
+    //check whether modal opens up
+    expect(wrapper.find(Modal).prop('show')).toEqual(true);
+})
+
+it('close the modal upon close click', () => {
+    const wrapper = mount(
+        <Provider store={store}>
+            <App />
+        </Provider>);
+    //find and click on first edit button in list
+    const button = wrapper.find(RatingsHome).find(Rating).find('button').at(0);
+    button.simulate('click');
+    expect(wrapper.find(Modal).prop('show')).toEqual(true);
+    //check whether modal closes up using property show
+    const closebutton = wrapper.find('#closeBtn').at(0);
+    closebutton.simulate('click');
+    expect(wrapper.find(Modal).prop('show')).toEqual(false);
 })
 
 it('Edit rating is successfull', () => {
@@ -70,10 +92,8 @@ it('Edit rating is successfull', () => {
     button.simulate('click');
     //get save button in modal pop up
     const savebutton = wrapper.find('.saverate').at(0);    
-    //click on rating star 4.5 present at index 1
-    wrapper.find('.rating').find("input").at(1).simulate('click');
-    //click save after rating
-    savebutton.simulate('click'); 
+    //click save where 4.5 is default rating
+    savebutton.simulate('click');
     //in the list loop through, get selected car and check rating = 4.5
     wrapper.find('.carrow').forEach((node) => {
         if (node.find('.carnamerow').text() == carname) {
@@ -84,31 +104,17 @@ it('Edit rating is successfull', () => {
     });
 })
 
+it("Random rating button is visible", () => {
+    let wrapper = shallow(<RatingsHome/>);
+    expect(wrapper.find('#toggleBtn').text()).toEqual("Start Random Rating");
+})
 
-it("Random rating works", () => {        
-    const wrapper = mount(
-        <Provider store={store}>
-            <App />
-        </Provider>
-    );
-    const cars = wrapper.find('.carrow');
-    var i = 0;
-    console.log(cars.at(i).find('.carnamerow').text());
-    const randomratingbutton = wrapper.find(RatingsHome).find('.toggleBtn').first();
-    randomratingbutton.simulate('click');
-    //after 5 seconds, loop through and check if ordered list changes at any position to confirm random rating works. Also log which car has changed random rating 
-    setTimeout(()=>{
-        wrapper.find('.carrow').forEach((node) => {
-            console.log(cars.at(i).find('.carnamerow').text());
-            if (node.find('.carnamerow').text() != cars.at(i).find('.carnamerow').text()) {
-                console.log(cars.at(i).find('.carnamerow').text());
-                //expect(rating == 4.5);
-            }
-            console.log("i is " + i);
-            i++;
-        });
-    }, 6000);    
-
+it("Random rating button is clicked", () => {
+    let wrapper = shallow(<RatingsHome/>);
+    console.log(wrapper.find('#toggleBtn').text());
+    wrapper.find('#toggleBtn').simulate('click');
+    //After click state value of button text should change
+    expect(wrapper.find('#toggleBtn').text()).toEqual("Stop Random Rating"); 
 })
 
 

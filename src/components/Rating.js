@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, ButtonToolbar } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 
 class Rating extends React.Component {
     constructor(props) {
@@ -9,12 +9,7 @@ class Rating extends React.Component {
             carname: "",
             carrating: 0,
             carid: 0,
-            randomRatingStarted: true,
-            randomRatingCar: "",
         }
-    }
-
-    componentDidMount() {
     }
 
     open(item) {
@@ -25,12 +20,14 @@ class Rating extends React.Component {
         this.setState({ showModal: false });
     }
 
+    //modal - save rating
     save() {
         let selectedRating = document.querySelector("input[name=rating]:checked") != null ? document.querySelector("input[name=rating]:checked").value : "4.5";
         this.props.onSaveRating(this.state.carid, selectedRating);
         this.setState({ showModal: false });
     }
 
+    //on modal pop up open, to preset old rating from list for particular item
     onEntered() {
         if (this.state.carrating != 0) {
             let selector = this.state.carrating.toString();
@@ -40,6 +37,7 @@ class Rating extends React.Component {
         }
     }
 
+    //this is to populate table of all cars 
     populateTable(car, index) {
         return (
             <tr key={index} className="carrow">
@@ -57,17 +55,14 @@ class Rating extends React.Component {
         );
     }
 
+    // Applications works in chrome browser, please refer package json for supported browsers
     render() {
-        const { messages } = this.state;
         return (
             <div>
-                {/* {messages.map((message, index) =>
-                    <div key={index} className="alert alert-success">{message.text}</div>
-                )} */}
                 <table className="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Car ID</th>
                             <th>Car Name</th>
                             <th>Car Type</th>
                             <th>Avg. Customer Rating</th>
@@ -99,7 +94,7 @@ class Rating extends React.Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button className="saverate" onClick={this.save.bind(this)}>Save</Button>
-                        <Button onClick={this.close.bind(this)}>Close</Button>
+                        <Button id="closeBtn" onClick={this.close.bind(this)}>Close</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

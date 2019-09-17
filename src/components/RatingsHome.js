@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button, Modal, ButtonToolbar } from 'react-bootstrap';
+import { Button, ButtonToolbar } from 'react-bootstrap';
 import Rating from './Rating';
-import { Subject, Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
-
+var eventStream = new Subject();
+var randomRatingStarted = false;
 class RatingsHome extends React.Component {
 
     constructor(props) {
@@ -16,11 +17,29 @@ class RatingsHome extends React.Component {
                 "carrating": 0
             }
         }
-    }
+    }    
 
-    componentDidMount() {
-        var eventStream = new Subject();
-        let ref = this;
+    randomRate() {
+        let ref = this,
+            timeout = null;
+        //toggle button status
+        randomRatingStarted = !randomRatingStarted;
+        (function push() {
+            if (randomRatingStarted == true) {
+                ref.setState({ randomRatingStarted: true });
+                timeout = setTimeout(
+                    () => {
+                        eventStream.next(ref.getRandomRating());
+                        push();
+                    },
+                    ref.getRandomTime()
+                );
+            }
+            else{
+                ref.setState({ randomRatingStarted: false });
+            }
+        })();
+
         var subscription = eventStream.subscribe(
             function (rating) {
                 let randomCarIdToRate = ref.getRandomCarId();
@@ -34,35 +53,10 @@ class RatingsHome extends React.Component {
             function () {
                 console.log('Completed');
             });
-
-        var my_function = function () {
-            var randomRatingRunningStatus = ref.state.randomRatingStarted;
-            ref.setState({ randomRatingStarted: !randomRatingRunningStatus })
-            let timeout = null;
-
-            (function push() {
-                if (ref.state.randomRatingStarted == true) {
-                    timeout = setTimeout(
-                        () => {
-                            eventStream.next(ref.getRandomRating());
-                            push();
-                        },
-                        ref.getRandomTime()
-                    );
-                }
-            })();
-        }
-
-        if (document.getElementById('toggleBtn') != null ||
-            document.getElementById('toggleBtn') != undefined) {
-            document.getElementById("toggleBtn").onclick = my_function;
-        }
     }
 
     getRandomRating() {
-        var min = 0.5,
-            max = 5.0,
-            ratingarray = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5],
+        var ratingarray = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5],
             randomRatingValue = ratingarray[Math.floor(Math.random() * ratingarray.length)];
         return randomRatingValue;
     }
@@ -81,49 +75,7 @@ class RatingsHome extends React.Component {
         return randCarId;
     }
 
-    sendMessage() {
-        debugger;
-        let ref = this;
-        const stopButton = document.querySelector('#stop-button');
-        // send message to subscribers via observable subject
-        //messageService.sendMessage(this.state.random);
-        var ob = new Observable(sub => {
-            let timeout = null;
-
-            // recursively send a random number to the subscriber
-            // after a random delay
-            (function push() {
-                timeout = setTimeout(
-                    () => {
-                        sub.next(ref.getRandomRating());
-                        push();
-                    },
-                    ref.getRandomTime()
-                );
-            })();
-
-            // clear any pending timeout on teardown
-            return () => clearTimeout(timeout);
-        });
-
-        ob.subscribe(rating => {
-            ref.props.onSaveRating(ref.getRandomCarId(), rating);
-            console.log("random rating after random time is  " + rating);
-            this.setState({ randomRatingCar: true });
-        });
-
-        // const stopSubscription = Rx.Observable
-        //     .fromEvent(stopButton, 'click')
-        //     .subscribe(
-        //         () => {
-        //             intervalSubscription.unsubscribe();
-        //             stopSubscription.unsubscribe();
-        //         },
-        //         (error) => console.error(error),
-        //         () => console.log('Click listener completed')
-        //     );
-    }
-
+    // Applications works in chrome browser, please refer package json for supported browsers
     render() {
         return (
             <div className="wrapper">
@@ -134,14 +86,12 @@ class RatingsHome extends React.Component {
                                 <Rating cars={this.props.cars} onSaveRating={this.props.onSaveRating} />
                                 <br />
                                 <ButtonToolbar>
-                                    <div className="col-sm-2 toggleBtn"><Button variant={this.state.randomRatingStarted == false ? "success" : "danger"} id="toggleBtn">{this.state.randomRatingStarted == false ? "Start Random Rating" : "Stop Random Rating"}</Button></div>
+                                    <div className="col-sm-2 toggleBtn"><Button onClick={this.randomRate.bind(this)} variant={this.state.randomRatingStarted == false ? "success" : "danger"} id="toggleBtn">{this.state.randomRatingStarted == false ? "Start Random Rating" : "Stop Random Rating"}</Button></div>
                                 </ButtonToolbar>
                             </div>
                         </div>
                     </section>
                 </div>
-
-
             </div>
         )
     }

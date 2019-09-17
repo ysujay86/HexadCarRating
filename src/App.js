@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import logo from './logo.svg';
 import './App.css';
 import './Styles/myStyles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import RatingsHome from './components/RatingsHome';
 
+// Applications works in chrome browser and not in IE, please refer package json for supported browsers
 class App extends Component {
   render() {
     return (
