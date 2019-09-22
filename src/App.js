@@ -40,41 +40,7 @@ const mapDispatchToProps = dispatch => {
           carRating
         }
       });
-    },
-    onAddToFavorites: videoId => {
-      //this function will be accessible via props in the component
-      dispatch({
-        type: "ADD_TO_FAVORITES",
-        videoId: videoId
-      });
-    },
-    removeFromFavorites: videoId => {
-      //this function will be accessible via props in the component
-      dispatch({
-        type: "REMOVE_FROM_FAVORITES",
-        videoId: videoId
-      });
-    },
-    watchVideo: (videoId, videoIndex) => {
-      //this function will be accessible via props in the component
-      dispatch({
-        type: "WATCH_VIDEO",
-        videoData: {
-          videoId,
-          videoIndex
-        }
-      });
-    },
-    watchVideoFromFavs: (videoId, videoIndex) => {
-      //this function will be accessible via props in the component
-      dispatch({
-        type: "WATCH_VIDEO_FROM_FAVS",
-        favData: {
-          videoId,
-          videoIndex
-        }
-      });
-    }
+    }  
   };
 };
 export default connect(
